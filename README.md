@@ -25,7 +25,19 @@ A Sequential neural network model was chosen for our basic feed-forward classifi
 - 1 hidden layer, also using ReLu activation for 42 (half of inputs) neurons. 
 - An output layer using Sigmoid activation for only 1 ouput neuron, providing a success/failure prediction.
 
-- Optimized using Adam, for ease of handling many parameters. 
+- Optimized using Adam, for ease of handling many parameters. This was later replaced with Keras Legacy, in order to better accomodate my M1 Mac machine. 
 - Loss function is 'binary_crossentropy', suitable for our binary classification. 
+- A metric of Accuracy is used for feedback during the training and evaluation phase. 
+
+
+The first run of our model produced an accuracy score of only .73, so further enhancement and evaluation is needed. 
+
+Since CLASSIFICATION produced the most sparse columns when one-hot encoded, I filtered out the bottom 3% of value-counts, which reduced inputs from 83 to 46, almost half. Still, this resulted in poor accuracy, with Loss = .55 and Accuracy = .73
+
+In fact, after this first adjustment there were still noticeably more sparce columns (95% of values were zeros) than non-sparse columns. This suggests that Primary Component Analysis might be helpful. I also decided to apply Early Stopping since it seemed that many epochs would be required, which could be costly in terms of time. This required that I redo some earlier code, because I had to split our original data into 3 sets: training, validation, and testing. 
+
+PCA determined that only 34 PCs were needed to account for 95% of variation in our dataset. However, testing the model using 34 PCs yeilded no improvement. I spent a little more time here playing with parameters such as batch, epoch, and learning rate. 
+
+
 
 
