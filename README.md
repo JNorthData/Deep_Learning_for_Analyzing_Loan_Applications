@@ -30,13 +30,21 @@ A Sequential neural network model was chosen for our basic feed-forward classifi
 - A metric of Accuracy is used for feedback during the training and evaluation phase. 
 
 
-The first run of our model produced an accuracy score of only .73, so further enhancement and evaluation is needed. 
+The first run of my model produced an accuracy score of only .73, so further enhancement and evaluation is needed. 
 
 Since CLASSIFICATION produced the most sparse columns when one-hot encoded, I filtered out the bottom 3% of value-counts, which reduced inputs from 83 to 46, almost half. Still, this resulted in poor accuracy, with Loss = .55 and Accuracy = .73
 
 In fact, after this first adjustment there were still noticeably more sparce columns (95% of values were zeros) than non-sparse columns. This suggests that Primary Component Analysis might be helpful. I also decided to apply Early Stopping since it seemed that many epochs would be required, which could be costly in terms of time. This required that I redo some earlier code, because I had to split our original data into 3 sets: training, validation, and testing. 
 
-PCA determined that only 34 PCs were needed to account for 95% of variation in our dataset. However, testing the model using 34 PCs yeilded no improvement. I spent a little more time here playing with parameters such as batch, epoch, and learning rate. 
+PCA determined that only 34 PCs were needed to account for 95% of variation in my data. However, testing the model using 34 PCs yeilded no improvement. I spent a little more time here playing with parameters such as batch, epoch, and learning rate. I determined that a 1024 batch with 10000 epochs at a learning rate of .001 was a good baseline for basic tuning, especially with early stopping. With patience set to 1000, Most runs stopped out at around 1000 epochs, achieving only Loss=.53 and Accuracy=.74. Essentially, I found that I could run the model 50 times or 1000 times, and it simply didn't affect the results. The structure of the model itself must need some reworking. 
+
+
+
+
+
+
+
+
 
 
 
